@@ -1,0 +1,14 @@
+#!/bin/sh
+
+FILES="build-stats-report.sh build-stats-fetch.sh build-stats-fetch-all.sh"
+
+for file in $FILES
+do
+  [[ -e /apps/scripts/env_summary/$file ]] && echo mv -f /apps/scripts/env_summary/$file /apps/scripts/env_summary/.$(basename $file)
+done
+
+sudo cp $FILES /apps/scripts/env_summary 
+sudo chown -R jenkins:webadmin /apps/scripts/env_summary 
+sudo chmod 775 /apps/scripts/env_summary
+cd /apps/scripts/env_summary
+sudo chmod 775 $FILES
